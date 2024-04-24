@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ㅈ</title>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        background: linear-gradient(to right, #dae2f8, #d6a4a4);
+    }
+    #result {
+        font-size: 24px;
+        margin-top: 20px;
+        color: #333;
+        font-weight: bold;
+    }
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        transition: background-color 0.3s, box-shadow 0.3s;
+    }
+    button:hover {
+        background-color: #45a049;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+    label, #probability {
+        margin: 10px;
+    }
+</style>
+</head>
+<body>
+<label for="slider">자퇴 확률 조정: <span id="probability">50%</span></label>
+<input type="range" id="slider" min="0" max="99" value="50" onchange="updateProbability()">
+<button onclick="chooseRandom()">행운의 신이 그대의 편이기를</button>
+<div id="result"></div>
+<script>
+function updateProbability() {
+    var slider = document.getElementById("slider");
+    var probability = document.getElementById("probability");
+    probability.textContent = slider.value + "%";
+}
+
+function chooseRandom() {
+    var slider = document.getElementById("slider");
+    var probability = parseInt(slider.value);
+    var randomNumber = Math.random() * 100;
+    if (randomNumber < 1) {
+        document.getElementById("result").innerText = "결정: 자살";
+    } else if (randomNumber < probability + 1) {
+        document.getElementById("result").innerText = "결정: 자퇴";
+    } else {
+        document.getElementById("result").innerText = "결정: 남기";
+    }
+}
+</script>
+</body>
+</html>
